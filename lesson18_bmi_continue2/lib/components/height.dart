@@ -1,23 +1,23 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson18_bmi_continue2/theme/app_colors.dart';
 
-class StatusCardSlider extends StatelessWidget {
-  const StatusCardSlider({
-    super.key, required this.text, required this.text1, required this.text2,
+class Height extends StatelessWidget {
+  const Height({
+    super.key,
+    required this.text,
+    required this.text1,
+    required this.text2,
   });
-  final String text, text1, text2;
+
+  final String text;
+  final String text1;
+  final String text2;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-            color: AppColors.cardColor,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
     children:  [
     Text(text,style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
     Row(
@@ -36,14 +36,12 @@ class StatusCardSlider extends StatelessWidget {
         value: 180, 
         min: 0, 
         max: 240, activeColor: AppColors.whiteColor, 
-        thumbColor: const Color(0xffff0f65), 
+        thumbColor: AppColors.pinkColor, 
        onChanged: (value) {},
       ),
     ),
     
-            ],
-            ),
-            ),
-            );
+    ],
+    );
   }
 }

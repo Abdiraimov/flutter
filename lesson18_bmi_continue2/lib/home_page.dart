@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lesson18_bmi_continue2/components/calculate_button.dart';
+import 'package:lesson18_bmi_continue2/components/height.dart';
+import 'package:lesson18_bmi_continue2/components/male_female.dart';
 import 'package:lesson18_bmi_continue2/components/status_card.dart';
-import 'package:lesson18_bmi_continue2/components/status_card2.dart';
-import 'package:lesson18_bmi_continue2/components/status_card_for_slider.dart';
+import 'package:lesson18_bmi_continue2/components/weight_age.dart';
 import 'package:lesson18_bmi_continue2/theme/app_colors.dart';
 import 'package:lesson18_bmi_continue2/theme/app_texts.dart';
 
@@ -13,61 +15,100 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isTrue = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
-        title: const Center(child:  Text(AppTexts.bmi)),
+        title: const Center(child: Text(AppTexts.bmi)),
         elevation: 0,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 21, top: 32, right: 21, bottom: 41),
-          child: Column(
-            children:  [
+      ),
+      body: Padding(
+        padding:
+            const EdgeInsets.only(left: 21, top: 32, right: 21, bottom: 41),
+        child: Column(
+          children: [
             Expanded(
               child: Row(
-                children:  const [
-                  StatusCard(icon: Icons.male, text: AppTexts.male,),
-                SizedBox(width: 39,),
-                StatusCard(icon: Icons.female, text: AppTexts.female,),
-                  
-            
-              ],),
-            ),
-            const SizedBox(height: 18,),
-            Expanded(
-              child: Row(
-                children: const [
-                  StatusCardSlider(
-                    text: AppTexts.height,
-                  text1: '180', 
-                  text2: 'cm',
-
+                children: [
+                  StatusCard(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isTrue = true;
+                        print('11');
+                        });
+                        
+                      },
+                      child: MaleFemale(
+                        icon: Icons.male,
+                        text: AppTexts.male,
+                        isTrue: isTrue,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 35,
+                  ),
+                  StatusCard(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isTrue = false;
+                        print('22');
+                        });
+                        
+                      },
+                      child: MaleFemale(
+                        icon: Icons.female,
+                        text: AppTexts.female,
+                        isTrue: !isTrue,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-             const SizedBox(height: 18,),
-            Expanded(
-              child: Row(children: const [
-                StatusCard2(text: AppTexts.weight,san: '60'),
-                SizedBox(width: 39,),
-                StatusCard2(text: AppTexts.age,san: '28'),
-            
-              ],),
+            const SizedBox(
+              height: 18,
             ),
-            
-          ],),
-        ),
-        bottomNavigationBar: Container(
-              height: 73,
-              width: double.infinity,
-              color: AppColors.pinkColor,
-              child: const Center(child: Text(AppTexts.calculator, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),))
+            const StatusCard(
+              child: Height(
+                text: AppTexts.height,
+                text1: '180',
+                text2: 'cm',
               ),
-              );
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: Row(
+                children: const [
+                  StatusCard(
+                    child: WeightAge(
+                      text: AppTexts.weight,
+                      san: '60',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  StatusCard(
+                    child: WeightAge(
+                      text: AppTexts.age,
+                      san: '28',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const CalculateButton(),
+    );
   }
 }
-
