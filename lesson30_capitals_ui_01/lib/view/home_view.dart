@@ -19,14 +19,14 @@ class _HomeViewState extends State<HomeView> {
     'Africa',
     'Australia'
   ];
-  List<String> images = [
-    'africa.svg',
-    'asia.svg',
-    'europe.svg',
-    'north_america.svg',
-    'australia.svg',
-    'sourth_america.svg',
-  ];
+  // List<String> images = [
+  //   'africa.svg',
+  //   'asia.svg',
+  //   'europe.svg',
+  //   'north_america.svg',
+  //   'australia.svg',
+  //   'sourth_america.svg',
+  // ];
 
   Map<dynamic, dynamic> svg = {
     'Asia': 'asia.svg',
@@ -95,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SvgPicture.asset(
-                                'assets/containers/${svg[continents[index]]}',
+                                'assets/continents/${svg[continents[index]]}',
                               )
                             ],
                           )),
