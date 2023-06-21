@@ -82,7 +82,8 @@ class _HomeViewState extends State<HomeView> {
                                 'assets/continents/${continents[index].image}.svg',
                                 width: 100,
                                 color: continents[index].colors,
-                              )
+                              ),
+                              
                             ],
                           )),
                     );

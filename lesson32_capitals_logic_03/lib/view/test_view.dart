@@ -11,6 +11,8 @@ class TestView extends StatefulWidget {
 
 class _TestViewState extends State<TestView> {
   int indexText = 0;
+  int tuuraJoop = 0;
+  int kataJoop = 0;
   
   @override
   Widget build(BuildContext context) {
@@ -97,10 +99,41 @@ class _TestViewState extends State<TestView> {
                   color: Colors.grey[400],
                   child: InkWell(
                     onTap: () {
-                      // onTap(jooptor[index].isTrue);
+                      if(indexText +1 == widget.suroo.length){
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Сиздин тест жыйынтыгыңыз!'),
+                            content: Text('Туура: $tuuraJoop\nКата:$kataJoop'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  indexText = 0;
+                                  kataJoop = 0;
+                                  tuuraJoop = 0;
+                                  setState(() {
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }else{
+                        if(widget.suroo[indexText].jooptor[indexText].tuuraJoop == true){
+                          tuuraJoop++;
+                        }else{
+                          kataJoop++;
+                        }
+                        
+                      }
+                      setState(() {
+                        indexText++;
+                      });
                     },
                     child:  Center(
-                      child: Text(widget.suroo[index].jooptor.toString()),
+                      child: Text(widget.suroo[indexText].jooptor[index].text),
                     ),
                   ),
                 );
