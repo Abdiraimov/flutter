@@ -13,7 +13,7 @@ class _TestViewState extends State<TestView> {
   int indexText = 0;
   int tuuraJoop = 0;
   int kataJoop = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,12 +33,12 @@ class _TestViewState extends State<TestView> {
                 ),
               ],
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('0', style: AppTextStyle.num1Style),
+                Text('$kataJoop', style: AppTextStyle.num1Style),
                 Text('32', style: AppTextStyle.num2Style),
-                Text('0', style: AppTextStyle.num3Style),
+                Text('$tuuraJoop', style: AppTextStyle.num3Style),
               ],
             ),
           ),
@@ -66,21 +66,24 @@ class _TestViewState extends State<TestView> {
         children: [
           Slider(
             activeColor: Colors.black,
-            value: 200,
-            onChanged: (v) {},
+            value: indexText.toDouble(),
+            onChanged: (value) {},
             min: 0,
-            max: 200,
+            max: 6,
           ),
-           Text(
+          Text(
             widget.suroo[indexText].text,
             style: AppTextStyle.capitalStyle,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Image.asset('assets/capitals/${widget.suroo[indexText].image}.jpeg', 
+            child: Image.asset(
+              'assets/capitals/${widget.suroo[indexText].image}.jpeg',
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
             // flex: 2,
             child: GridView.builder(
@@ -99,7 +102,7 @@ class _TestViewState extends State<TestView> {
                   color: Colors.grey[400],
                   child: InkWell(
                     onTap: () {
-                      if(indexText +1 == widget.suroo.length){
+                      if (indexText + 1 == widget.suroo.length) {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
@@ -120,19 +123,20 @@ class _TestViewState extends State<TestView> {
                             ],
                           ),
                         );
-                      }else{
-                        if(widget.suroo[indexText].jooptor[indexText].tuuraJoop == true){
+                      } else {
+                        if (widget.suroo[indexText].jooptor[index]
+                                .isBool ==
+                            true) {
                           tuuraJoop++;
-                        }else{
+                        } else {
                           kataJoop++;
                         }
-                        
                       }
                       setState(() {
                         indexText++;
                       });
                     },
-                    child:  Center(
+                    child: Center(
                       child: Text(widget.suroo[indexText].jooptor[index].text),
                     ),
                   ),
