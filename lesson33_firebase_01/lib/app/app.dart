@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lesson33_firebase_01/view/home_view.dart';
 import 'package:lesson33_firebase_01/view/todo_view.dart';
 
 class MyApp extends StatelessWidget {

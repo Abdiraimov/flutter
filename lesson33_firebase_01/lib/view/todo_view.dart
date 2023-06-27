@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson33_firebase_01/view/home_view.dart';
 
@@ -14,7 +15,23 @@ class _TodoViewState extends State<TodoView> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  /////////////////////////////////
+  Future<void> readData() async {
+    final db = FirebaseFirestore.instance;
+    await db.collection("todos").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
+  }
+  
+
   @override
+  void initState() {
+    readData();
+    // TODO: implement initState
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -93,14 +110,15 @@ class _TodoViewState extends State<TodoView> {
               ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
                   onPressed: () {
-                    if(_formKey.currentState!.validate()){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const HomeView()
-                        )
-                        );
-                    }   else{
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeView()),
+                      );
+                    } else {
                       null;
-                    }                
+                    }
                   },
                   icon: const Icon(
                     Icons.arrow_upward,
