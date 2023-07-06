@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lesson34_firebase_02/view/todo_view.dart';
+import 'package:lesson34_firebase_02/view/home_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TodoView(),
+      home: const HomeView(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson34_firebase_02/model.dart';
-import 'package:lesson34_firebase_02/view/home_view.dart';
 
 class TodoView extends StatefulWidget {
   const TodoView({super.key});
@@ -25,15 +25,15 @@ class _TodoViewState extends State<TodoView> {
       }
     });
   }
-  
+
   ///////////////////////////////////
-  Future<void> addTodo()async{
-   final db = FirebaseFirestore.instance;
-   final todos = Todo(
-    title: _titleController.text, 
-    description: _descriptionController.text, 
-    isComplated: isCompleted, 
-    author: _authorController.text);
+  Future<void> addTodo() async {
+    final db = FirebaseFirestore.instance;
+    final todos = Todo(
+        title: _titleController.text,
+        description: _descriptionController.text,
+        isComplated: isCompleted,
+        author: _authorController.text);
     await db.collection('todos').add(todos.toMap());
   }
 
@@ -43,6 +43,7 @@ class _TodoViewState extends State<TodoView> {
     // TODO: implement initState
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -120,9 +121,27 @@ class _TodoViewState extends State<TodoView> {
               ),
               ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                  onPressed: () async{
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return  SimpleDialog(
+                              backgroundColor: Colors.white.withOpacity(0.5),
+                              title: const Text(
+                                'Сиздин маалыматыңыз жөнөтүлүүдө',
+                                textAlign: TextAlign.center,),
+                                
+                              children: [
+                                CupertinoActivityIndicator(
+                                  radius: 20,
+                                  color: Colors.blue.withOpacity(0.5),
+                                )
+                              ],
+                            );
+                          });
                       await addTodo();
+                      Navigator.popUntil(context, (route) => route.isFirst);
                     } else {
                       null;
                     }
@@ -134,8 +153,7 @@ class _TodoViewState extends State<TodoView> {
                   label: const Text(
                     'Отправить',
                     style: TextStyle(color: Colors.white),
-                  )
-                  ),
+                  )),
             ],
           ),
         ),
